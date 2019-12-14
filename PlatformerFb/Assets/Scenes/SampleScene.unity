@@ -314,7 +314,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294908908, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
       propertyPath: jumpForce
-      value: 100
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 294908908, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
+      propertyPath: movementSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1387131363770614057, guid: c38f661f51db42e408a6caecf67a7510,
         type: 3}

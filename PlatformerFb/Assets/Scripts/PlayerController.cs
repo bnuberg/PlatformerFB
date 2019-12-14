@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded = true;
 
-    private BoxCollider2D boxCollider;
+    public GameObject test;
 
+    private BoxCollider2D boxCollider;
     private bool canJump = true;
 
     public float GetHorizontalDirection { get { return horizontal; } }
@@ -45,14 +46,20 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y),  5 << LayerMask.NameToLayer("Ground"));
+        isGrounded = Physics2D.OverlapCircle(new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y), boxCollider.bounds.extents.x, 1 << LayerMask.NameToLayer("Ground"));
+        OverlapCircleDebugDraw();
 
-        if(Input.GetButtonDown("Jump") && canJump && isGrounded)
+        if (Input.GetButtonDown("Jump") && canJump && isGrounded)
         {
             isGrounded = false;
             var force = new Vector2(0, jumpForce * Time.deltaTime);
             GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
-
         }
+    }
+
+    private void OverlapCircleDebugDraw()
+    {
+        test.transform.position = new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y);
+        test.GetComponent<CircleCollider2D>().radius = boxCollider.bounds.extents.x; 
     }
 }
