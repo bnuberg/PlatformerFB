@@ -17,7 +17,14 @@ public class PlayerController : MonoBehaviour
     public GameObject test;
 
     private BoxCollider2D boxCollider;
+    private SpriteRenderer playerSpriteRenderer;
     private bool canJump = true;
+
+
+    //BoxOverlap size values
+    [SerializeField]
+    float boxSizeX = 0.7f, boxSizeY = 0.2f;
+    
 
     public float GetHorizontalDirection { get { return horizontal; } }
 
@@ -25,6 +32,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -38,6 +46,8 @@ public class PlayerController : MonoBehaviour
     private void PlayerHorizontalMovement()
     {
         horizontal = Input.GetAxis("Horizontal");
+        
+        FlipSprite();
 
         Vector2 position = transform.position;
         position.x += horizontal * (movementSpeed * Time.deltaTime);
@@ -46,8 +56,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y), boxCollider.bounds.extents.x, 1 << LayerMask.NameToLayer("Ground"));
-        OverlapCircleDebugDraw();
+        isGrounded = Physics2D.OverlapBox(new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y), new Vector2( boxSizeX, boxSizeY), 0, 1 << LayerMask.NameToLayer("Ground"));
+        //Physics2D.OverlapCircle(new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y), boxCollider.bounds.extents.x, 1 << LayerMask.NameToLayer("Ground"));
+        OverlapBoxDebugDraw();
 
         if (Input.GetButtonDown("Jump") && canJump && isGrounded)
         {
@@ -57,9 +68,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OverlapCircleDebugDraw()
+    private void FlipSprite()
+    {
+        if (horizontal < 0)
+        {
+            playerSpriteRenderer.flipX = true;
+        }
+        else if (horizontal > 0)
+        {
+            playerSpriteRenderer.flipX = false;
+        }
+    }
+    private void OverlapBoxDebugDraw()
     {
         test.transform.position = new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y);
-        test.GetComponent<CircleCollider2D>().radius = boxCollider.bounds.extents.x; 
+        test.GetComponent<BoxCollider2D>().size = new Vector2(boxSizeX, boxSizeY);
     }
 }
