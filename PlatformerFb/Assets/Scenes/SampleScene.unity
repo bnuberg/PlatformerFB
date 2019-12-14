@@ -486,28 +486,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 294908908, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
-      propertyPath: jumpForce
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 294908908, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
-      propertyPath: movementSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 294908908, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
       propertyPath: test
       value: 
       objectReference: {fileID: 860932455}
     - target: {fileID: 294908908, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
-      propertyPath: overlapRadius
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 294908910, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 294908910, guid: c38f661f51db42e408a6caecf67a7510, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
+      propertyPath: jumpForce
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 1387131363770614057, guid: c38f661f51db42e408a6caecf67a7510,
         type: 3}
