@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float jumpForce = 100f;
+
+    [SerializeField]
+    private AudioClip jumpSound;
+
+    private AudioSource audioSource;
 
     private bool isGrounded = true;
 
@@ -31,8 +37,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Assert.IsNotNull(jumpSound);
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -40,7 +48,6 @@ public class PlayerController : MonoBehaviour
     {
         PlayerHorizontalMovement();
         Jump();
-
     }
 
     private void PlayerHorizontalMovement()
@@ -57,14 +64,14 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         isGrounded = Physics2D.OverlapBox(new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y), new Vector2( boxSizeX, boxSizeY), 0, 1 << LayerMask.NameToLayer("Ground"));
-        //Physics2D.OverlapCircle(new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y), boxCollider.bounds.extents.x, 1 << LayerMask.NameToLayer("Ground"));
         OverlapBoxDebugDraw();
 
-        if (Input.GetButtonDown("Jump") && canJump && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             isGrounded = false;
             var force = new Vector2(0, jumpForce * Time.deltaTime);
             GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 
