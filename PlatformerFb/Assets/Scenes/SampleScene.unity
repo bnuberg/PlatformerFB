@@ -978,6 +978,11 @@ PrefabInstance:
       propertyPath: test
       value: 
       objectReference: {fileID: 860932455}
+    - target: {fileID: 2756629816864175400, guid: b9683eeea28a7da439c18bea1decd7ef,
+        type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2aa3312b53f1a194faacd20531447b0d, type: 3}
     - target: {fileID: 3819492936139818989, guid: b9683eeea28a7da439c18bea1decd7ef,
         type: 3}
       propertyPath: m_Name
