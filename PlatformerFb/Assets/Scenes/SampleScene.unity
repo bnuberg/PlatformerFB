@@ -568,21 +568,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 95880382}
     - target: {fileID: 1656887731, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
-      propertyPath: mainMenuBackground
-      value: 
-      objectReference: {fileID: 1668517856}
-    - target: {fileID: 1656887731, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
       propertyPath: menuScreenText
       value: 
       objectReference: {fileID: 262518347}
     - target: {fileID: 1656887731, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
-      propertyPath: startScreen
+      propertyPath: mainMenuBackground
       value: 
-      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 1656887731, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
-      propertyPath: gameOverScreen
-      value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 1668517856}
     - target: {fileID: 229362166271085877, guid: 6a813aaf783250b439124906ac02d5ff,
         type: 3}
       propertyPath: m_LocalPosition.x

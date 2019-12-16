@@ -622,3 +622,7 @@ MonoBehaviour:
   player: {fileID: 0}
   mainCamera: {fileID: 229362166271086025}
   mainMenuUI: {fileID: 0}
+  menuScreenText: {fileID: 0}
+  mainMenuBackground: {fileID: 0}
+  startScreen: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  gameOverScreen: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
