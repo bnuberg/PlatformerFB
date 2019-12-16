@@ -16,17 +16,16 @@ public class CameraBehaviour : MonoBehaviour
 
     private GameObject playerObject;
     private GameObject mainCameraObject;
+
+    public bool PauseState { get; set; }
     
     // Start is called before the first frame update
     void Start()
     {
-        playerObject = GameObject.Find("Player");
+        PauseState = true;
         mainCameraObject = GameObject.Find("Main Camera");
 
-        Assert.IsNotNull(playerObject);
-        Assert.IsNotNull(mainCameraObject);
-
-        transform.position = new Vector2(playerObject.transform.position.x + offset.x, playerObject.transform.position.y + offset.y);
+        Assert.IsNotNull(mainCameraObject);     
     }
 
     // Update is called once per frame
@@ -35,6 +34,10 @@ public class CameraBehaviour : MonoBehaviour
         FollowPlayer(playerObject, mainCameraObject);
     }
 
+    public void CameraResetView(GameObject player)
+    {
+        transform.position = new Vector2(player.transform.position.x + offset.x, player.transform.position.y + offset.y);
+    }
     void FollowPlayer(GameObject player, GameObject mainCamera)
     {
         if (player != null && mainCamera != null)
@@ -55,6 +58,10 @@ public class CameraBehaviour : MonoBehaviour
             }
 
             mainCamera.transform.position = new Vector3(xLerp, yLerp, -10);
+        }
+        else if(!player && mainCamera != null && PauseState == false)
+        {
+            playerObject = GameObject.Find("Player");
         }
     }
 
