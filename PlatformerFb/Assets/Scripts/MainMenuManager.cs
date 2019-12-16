@@ -12,7 +12,21 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject player, mainCamera, mainMenuUI;
 
+    [SerializeField]
+    private Text menuScreenText;
+
+    [SerializeField]
+    private Image mainMenuBackground;
+
+    [SerializeField]
+    private Sprite startScreen, gameOverScreen;
+
     private Vector2 playerStartingPos;
+
+    private string startScreenText = "FB Platformer";
+    private string gameOverScreenText = "Game Over";
+
+    private bool isGameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +36,8 @@ public class MainMenuManager : MonoBehaviour
         Assert.IsNotNull(mainMenuUI);
         Assert.IsNotNull(player);
         Assert.IsNotNull(mainCamera);
-
+        Assert.IsNotNull(mainMenuBackground);
+        Assert.IsNotNull(menuScreenText);
         enableSoundButton.SetActive(false);
         playerStartingPos = player.transform.position;
         mainCamera.GetComponent<CameraBehaviour>().CameraResetView(player);
@@ -39,14 +54,19 @@ public class MainMenuManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            mainMenuUI.SetActive(true);
-            player.SetActive(false);
-            mainCamera.GetComponent<CameraBehaviour>().PauseState = true;
+            Pause();
         }
     }
     public void RestartGame()
     {
         StartGame();
+        if (isGameOver)
+        {
+            mainMenuBackground.sprite = startScreen;
+            menuScreenText.text = startScreenText;
+            isGameOver = false;
+            startGameButton.SetActive(true);
+        }
         player.transform.position = playerStartingPos;
         mainCamera.GetComponent<CameraBehaviour>().CameraResetView(player);
     }
@@ -69,5 +89,21 @@ public class MainMenuManager : MonoBehaviour
         enableSoundButton.SetActive(false);
         AudioListener.pause = false;
         muteSoundButton.SetActive(true);      
+    }
+    
+    public void GameOverScreen()
+    {
+        mainMenuBackground.sprite = gameOverScreen;
+        menuScreenText.text = gameOverScreenText;
+        Pause();
+        startGameButton.SetActive(false);
+        isGameOver = true;
+    }
+
+    private void Pause()
+    {
+        mainMenuUI.SetActive(true);
+        player.SetActive(false);
+        mainCamera.GetComponent<CameraBehaviour>().PauseState = true;
     }
 }
