@@ -97,6 +97,7 @@ MonoBehaviour:
   movementSpeed: 4
   jumpForce: 420
   jumpSound: {fileID: 8300000, guid: 2aa3312b53f1a194faacd20531447b0d, type: 3}
+  mainCamera: {fileID: 0}
   test: {fileID: 0}
   boxSizeX: 0.58
   boxSizeY: 0.2

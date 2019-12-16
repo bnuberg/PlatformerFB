@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioClip jumpSound;
 
+    [SerializeField]
+    private GameObject mainCamera;
+
     private AudioSource audioSource;
 
     private bool isGrounded = true;
@@ -24,8 +27,6 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider2D boxCollider;
     private SpriteRenderer playerSpriteRenderer;
-    private bool canJump = true;
-
 
     //BoxOverlap size values
     [SerializeField]
@@ -37,7 +38,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = GameObject.Find("Main Camera");
+
         Assert.IsNotNull(jumpSound);
+        Assert.IsNotNull(mainCamera);
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
@@ -90,5 +94,17 @@ public class PlayerController : MonoBehaviour
     {
         test.transform.position = new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y);
         test.GetComponent<BoxCollider2D>().size = new Vector2(boxSizeX, boxSizeY);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Death")
+        {
+            Death();
+        }
+    }
+    private void Death()
+    {
+        mainCamera.GetComponent<MainMenuManager>().GameOverScreen();
     }
 }
