@@ -87,8 +87,6 @@ public class MainMenuManager : MonoBehaviour
         mainMenuUI.SetActive(false);
         player.SetActive(true);
         mainCamera.GetComponent<CameraBehaviour>().PauseState = false;
-
-
     }
 
     public void MuteSound()
