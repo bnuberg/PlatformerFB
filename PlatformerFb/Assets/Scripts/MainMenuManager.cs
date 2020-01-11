@@ -21,7 +21,12 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private Sprite startScreen, gameOverScreen;
 
+    [SerializeField]
+    private AudioClip mainMusic, deathMusic;
+
     private Vector2 playerStartingPos;
+
+    private AudioSource audioSource;
 
     private string startScreenText = "FB Platformer";
     private string gameOverScreenText = "Game Over";
@@ -38,9 +43,14 @@ public class MainMenuManager : MonoBehaviour
         Assert.IsNotNull(mainCamera);
         Assert.IsNotNull(mainMenuBackground);
         Assert.IsNotNull(menuScreenText);
+
         enableSoundButton.SetActive(false);
         playerStartingPos = player.transform.position;
         mainCamera.GetComponent<CameraBehaviour>().CameraResetView(player);
+        audioSource = GetComponent<AudioSource>();
+
+        SetMainMusic(mainMusic);
+
         player.SetActive(false);
     }
 
@@ -66,6 +76,8 @@ public class MainMenuManager : MonoBehaviour
             menuScreenText.text = startScreenText;
             isGameOver = false;
             startGameButton.SetActive(true);
+
+            SetMainMusic(mainMusic);
         }
         player.transform.position = playerStartingPos;
         mainCamera.GetComponent<CameraBehaviour>().CameraResetView(player);
@@ -75,6 +87,8 @@ public class MainMenuManager : MonoBehaviour
         mainMenuUI.SetActive(false);
         player.SetActive(true);
         mainCamera.GetComponent<CameraBehaviour>().PauseState = false;
+
+
     }
 
     public void MuteSound()
@@ -94,10 +108,12 @@ public class MainMenuManager : MonoBehaviour
     public void GameOverScreen()
     {
         mainMenuBackground.sprite = gameOverScreen;
-        menuScreenText.text = gameOverScreenText;
+        menuScreenText.text = "";
         Pause();
         startGameButton.SetActive(false);
         isGameOver = true;
+
+        SetMainMusic(deathMusic);
     }
 
     private void Pause()
@@ -105,5 +121,12 @@ public class MainMenuManager : MonoBehaviour
         mainMenuUI.SetActive(true);
         player.SetActive(false);
         mainCamera.GetComponent<CameraBehaviour>().PauseState = true;
+    }
+
+    private void SetMainMusic(AudioClip music)
+    {
+        audioSource.clip = music;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 }
