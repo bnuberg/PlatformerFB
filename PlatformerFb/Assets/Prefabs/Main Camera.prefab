@@ -519,7 +519,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 19d4fc7c5cec63142ad5b4a9fa4715b5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.235
   m_Pitch: 1
   Loop: 1
@@ -626,3 +626,5 @@ MonoBehaviour:
   mainMenuBackground: {fileID: 0}
   startScreen: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   gameOverScreen: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  mainMusic: {fileID: 8300000, guid: 19d4fc7c5cec63142ad5b4a9fa4715b5, type: 3}
+  deathMusic: {fileID: 8300000, guid: adccfd2fef8502649878bd0ca4ae9694, type: 3}
