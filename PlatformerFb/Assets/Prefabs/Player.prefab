@@ -97,6 +97,7 @@ MonoBehaviour:
   movementSpeed: 4
   jumpForce: 420
   jumpSound: {fileID: 8300000, guid: 2aa3312b53f1a194faacd20531447b0d, type: 3}
+  deathSound: {fileID: 8300000, guid: 9cb7ab13eb6ab554ca3452f2d49ead6f, type: 3}
   mainCamera: {fileID: 0}
   test: {fileID: 0}
   boxSizeX: 0.58
@@ -113,7 +114,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.169
+  m_Volume: 0.238
   m_Pitch: 1
   Loop: 0
   Mute: 0

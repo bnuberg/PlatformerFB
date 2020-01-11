@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 100f;
 
     [SerializeField]
-    private AudioClip jumpSound;
+    private AudioClip jumpSound, deathSound;
 
     [SerializeField]
     private GameObject mainCamera;
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
 
         Assert.IsNotNull(jumpSound);
+        Assert.IsNotNull(deathSound);
         Assert.IsNotNull(mainCamera);
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Death()
     {
+        AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
         mainCamera.GetComponent<MainMenuManager>().GameOverScreen();
     }
 }
