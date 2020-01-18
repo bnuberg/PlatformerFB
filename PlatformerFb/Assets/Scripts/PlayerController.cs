@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource audioSource;
 
+    [SerializeField]
+    private Animator animator;
+
     private bool isGrounded = true;
 
     public GameObject test;
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
         Assert.IsNotNull(mainCamera);
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();      
     }
 
     // Update is called once per frame
@@ -57,12 +60,13 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerHorizontalMovement()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        
+        horizontal = Input.GetAxis("Horizontal") * (movementSpeed * Time.deltaTime);
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
         FlipSprite();
 
         Vector2 position = transform.position;
-        position.x += horizontal * (movementSpeed * Time.deltaTime);
+        position.x += horizontal;
         transform.position = position;
     }
 
@@ -76,8 +80,9 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             var force = new Vector2(0, jumpForce * Time.deltaTime);
             GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
-            audioSource.PlayOneShot(jumpSound);
+            audioSource.PlayOneShot(jumpSound);            
         }
+        animator.SetBool("isJumping", !isGrounded);
     }
 
     private void FlipSprite()

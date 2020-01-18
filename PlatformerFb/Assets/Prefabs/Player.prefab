@@ -99,6 +99,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 2aa3312b53f1a194faacd20531447b0d, type: 3}
   deathSound: {fileID: 8300000, guid: 9cb7ab13eb6ab554ca3452f2d49ead6f, type: 3}
   mainCamera: {fileID: 0}
+  animator: {fileID: 0}
   test: {fileID: 0}
   boxSizeX: 0.58
   boxSizeY: 0.2
@@ -272,7 +273,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6333333, y: 1.1333333}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
