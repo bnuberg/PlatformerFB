@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,12 +15,18 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 100f;
 
     [SerializeField]
-    private AudioClip jumpSound, deathSound;
+    private AudioClip jumpSound, deathSound, pickupSound;
 
     [SerializeField]
     private GameObject mainCamera;
 
     private AudioSource audioSource;
+
+    [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
+    private Text starCounterText;
 
     private bool isGrounded = true;
 
@@ -27,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider2D boxCollider;
     private SpriteRenderer playerSpriteRenderer;
+
+    private int starCounter;
 
     //BoxOverlap size values
     [SerializeField]
@@ -41,11 +50,13 @@ public class PlayerController : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
 
         Assert.IsNotNull(jumpSound);
+        Assert.IsNotNull(pickupSound);
         Assert.IsNotNull(deathSound);
         Assert.IsNotNull(mainCamera);
+        Assert.IsNotNull(starCounterText);
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();      
     }
 
     // Update is called once per frame
@@ -53,16 +64,18 @@ public class PlayerController : MonoBehaviour
     {
         PlayerHorizontalMovement();
         Jump();
+        starCounterText.text = "Stars: " + starCounter;
     }
 
     private void PlayerHorizontalMovement()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        
+        horizontal = Input.GetAxis("Horizontal") * (movementSpeed * Time.deltaTime);
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
         FlipSprite();
 
         Vector2 position = transform.position;
-        position.x += horizontal * (movementSpeed * Time.deltaTime);
+        position.x += horizontal;
         transform.position = position;
     }
 
@@ -76,8 +89,9 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             var force = new Vector2(0, jumpForce * Time.deltaTime);
             GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
-            audioSource.PlayOneShot(jumpSound);
+            audioSource.PlayOneShot(jumpSound);            
         }
+        animator.SetBool("isJumping", !isGrounded);
     }
 
     private void FlipSprite()
@@ -103,10 +117,17 @@ public class PlayerController : MonoBehaviour
         {
             Death();
         }
+        if(collision.gameObject.tag == "Star")
+        {
+            starCounter++;
+            audioSource.PlayOneShot(pickupSound);
+            Destroy(collision.gameObject);
+        }
     }
     private void Death()
     {
         AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
         mainCamera.GetComponent<MainMenuManager>().GameOverScreen();
+        starCounter = 0;
     }
 }

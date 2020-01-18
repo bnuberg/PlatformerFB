@@ -1037,6 +1037,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 4893857228792636846, guid: 6dd38b11b77b5ff44892d5cc6ae3e460,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4893857229243702239, guid: 6dd38b11b77b5ff44892d5cc6ae3e460,
         type: 3}
       propertyPath: m_Color.r
