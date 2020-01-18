@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 100f;
 
     [SerializeField]
-    private AudioClip jumpSound, deathSound;
+    private AudioClip jumpSound, deathSound, pickupSound;
 
     [SerializeField]
     private GameObject mainCamera;
@@ -24,12 +25,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private Text starCounterText;
+
     private bool isGrounded = true;
 
     public GameObject test;
 
     private BoxCollider2D boxCollider;
     private SpriteRenderer playerSpriteRenderer;
+
+    private int starCounter;
 
     //BoxOverlap size values
     [SerializeField]
@@ -44,8 +50,10 @@ public class PlayerController : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
 
         Assert.IsNotNull(jumpSound);
+        Assert.IsNotNull(pickupSound);
         Assert.IsNotNull(deathSound);
         Assert.IsNotNull(mainCamera);
+        Assert.IsNotNull(starCounterText);
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();      
@@ -56,6 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerHorizontalMovement();
         Jump();
+        starCounterText.text = "Stars: " + starCounter;
     }
 
     private void PlayerHorizontalMovement()
@@ -108,10 +117,17 @@ public class PlayerController : MonoBehaviour
         {
             Death();
         }
+        if(collision.gameObject.tag == "Star")
+        {
+            starCounter++;
+            audioSource.PlayOneShot(pickupSound);
+            Destroy(collision.gameObject);
+        }
     }
     private void Death()
     {
         AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
         mainCamera.GetComponent<MainMenuManager>().GameOverScreen();
+        starCounter = 0;
     }
 }

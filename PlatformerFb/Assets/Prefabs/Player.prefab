@@ -51,10 +51,10 @@ BoxCollider2D:
   m_Offset: {x: -0.02, y: -0.017}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.6333333, y: 1.1}
+    newSize: {x: 0.6333333, y: 1.1}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 2aa3312b53f1a194faacd20531447b0d, type: 3}
   deathSound: {fileID: 8300000, guid: 9cb7ab13eb6ab554ca3452f2d49ead6f, type: 3}
   mainCamera: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 22734422}
   test: {fileID: 0}
   boxSizeX: 0.58
   boxSizeY: 0.2
@@ -209,6 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5719787701282739282}
   - component: {fileID: 7032043210776718654}
+  - component: {fileID: 22734422}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -279,3 +280,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &22734422
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8021380177823857284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6210b46aac4ed814ea5711197949b2ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
