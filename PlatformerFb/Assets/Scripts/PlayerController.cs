@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -37,6 +39,10 @@ public class PlayerController : MonoBehaviour
 
     private int starCounter;
 
+    [SerializeField]
+    private string scenename;
+
+
     //BoxOverlap size values
     [SerializeField]
     float boxSizeX = 0.7f, boxSizeY = 0.2f;
@@ -56,7 +62,8 @@ public class PlayerController : MonoBehaviour
         Assert.IsNotNull(starCounterText);
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();      
+        audioSource = GetComponent<AudioSource>();
+ 
     }
 
     // Update is called once per frame
@@ -123,6 +130,12 @@ public class PlayerController : MonoBehaviour
             audioSource.PlayOneShot(pickupSound);
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.tag == "Door")
+        {
+     
+            SceneManager.LoadScene(scenename, LoadSceneMode.Single);
+        }
+
     }
     private void Death()
     {
