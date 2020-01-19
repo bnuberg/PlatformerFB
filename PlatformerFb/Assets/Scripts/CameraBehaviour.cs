@@ -21,8 +21,7 @@ public class CameraBehaviour : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
-        PauseState = true;
+    {    
         mainCameraObject = GameObject.Find("Main Camera");
 
         Assert.IsNotNull(mainCameraObject);     

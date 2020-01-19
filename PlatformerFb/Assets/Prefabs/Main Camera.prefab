@@ -68,7 +68,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 991277bfb07cbfb44af03db3b9ade189, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -148,7 +148,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 0080a1d8b05b76841a78be8c460e07ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -228,7 +228,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 54c88cca138cd0a4d9731a96b8176050, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -265,8 +265,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958344682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.073, y: -0.136, z: 50}
-  m_LocalScale: {x: 3.9218004, y: 3.3246443, z: 1}
+  m_LocalPosition: {x: 0.127, y: -0.136, z: 50}
+  m_LocalScale: {x: 3.9374874, y: 3.3246443, z: 1}
   m_Children: []
   m_Father: {fileID: 229362166271085877}
   m_RootOrder: 0
@@ -308,7 +308,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: c978be81f70201b49957d080649aa10a, type: 3}
   m_Color: {r: 0.8207547, g: 0.7936543, b: 0.7936543, a: 1}
   m_FlipX: 0
@@ -388,7 +388,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 337384e375183a94283e0aeec25933e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -624,7 +624,7 @@ MonoBehaviour:
   mainMenuUI: {fileID: 0}
   menuScreenText: {fileID: 0}
   mainMenuBackground: {fileID: 0}
-  startScreen: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  gameOverScreen: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  startScreen: {fileID: 21300000, guid: 99a79fd594b580d47b813bd09aba44f1, type: 3}
+  gameOverScreen: {fileID: 21300000, guid: 3a9407fb134450f4e987dbad567af083, type: 3}
   mainMusic: {fileID: 8300000, guid: 19d4fc7c5cec63142ad5b4a9fa4715b5, type: 3}
   deathMusic: {fileID: 8300000, guid: adccfd2fef8502649878bd0ca4ae9694, type: 3}
