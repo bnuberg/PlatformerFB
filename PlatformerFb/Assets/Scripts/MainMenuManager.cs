@@ -51,7 +51,11 @@ public class MainMenuManager : MonoBehaviour
 
         SetMainMusic(mainMusic);
 
-        player.SetActive(false);
+        if (mainMenuUI.activeInHierarchy)
+        {
+            mainCamera.GetComponent<CameraBehaviour>().PauseState = true;
+            player.SetActive(false);
+        }
     }
 
     // Update is called once per frame

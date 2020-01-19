@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour
     //BoxOverlap size values
     [SerializeField]
     float boxSizeX = 0.7f, boxSizeY = 0.2f;
-    
+
+    private List<GameObject> stars = new List<GameObject>();
 
     public float GetHorizontalDirection { get { return horizontal; } }
 
@@ -63,7 +64,10 @@ public class PlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
- 
+        foreach (var star in GameObject.FindGameObjectsWithTag("Star"))
+        {
+            stars.Add(star);        
+        }
     }
 
     // Update is called once per frame
@@ -128,11 +132,10 @@ public class PlayerController : MonoBehaviour
         {
             starCounter++;
             audioSource.PlayOneShot(pickupSound);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
         if (collision.gameObject.tag == "Door")
-        {
-     
+        {  
             SceneManager.LoadScene(scenename, LoadSceneMode.Single);
         }
 
@@ -142,5 +145,12 @@ public class PlayerController : MonoBehaviour
         AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
         mainCamera.GetComponent<MainMenuManager>().GameOverScreen();
         starCounter = 0;
+        foreach (var star in stars)
+        {
+            if (!star.activeInHierarchy)
+            {
+                star.SetActive(true);
+            }
+        }
     }
 }

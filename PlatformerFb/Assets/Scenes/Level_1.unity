@@ -7591,14 +7591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 958344683, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.127
-      objectReference: {fileID: 0}
-    - target: {fileID: 958344683, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.9374874
-      objectReference: {fileID: 0}
     - target: {fileID: 1656887731, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
       propertyPath: muteSoundButton
       value: 
@@ -7627,16 +7619,6 @@ PrefabInstance:
       propertyPath: mainMenuBackground
       value: 
       objectReference: {fileID: 1668517856}
-    - target: {fileID: 1656887731, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
-      propertyPath: startScreen
-      value: 
-      objectReference: {fileID: 21300000, guid: 99a79fd594b580d47b813bd09aba44f1,
-        type: 3}
-    - target: {fileID: 1656887731, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
-      propertyPath: gameOverScreen
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a9407fb134450f4e987dbad567af083,
-        type: 3}
     - target: {fileID: 229362166271085877, guid: 6a813aaf783250b439124906ac02d5ff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7696,11 +7678,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 229362166271086025, guid: 6a813aaf783250b439124906ac02d5ff,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a813aaf783250b439124906ac02d5ff, type: 3}
