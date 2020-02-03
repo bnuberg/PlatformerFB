@@ -11,6 +11,9 @@ public class Player_Controller : MonoBehaviour
     [SerializeField]
     private GameObject projectile;
 
+    [SerializeField]
+    private float shootingSpeed = 1f;
+
     [Space]
     [Header("Movement Attributes")]
     [SerializeField]
@@ -33,8 +36,7 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         InputHandler();
-        Move();
-        LookatMouse();
+        Move();  
     }
 
     private void InputHandler()
@@ -43,25 +45,54 @@ public class Player_Controller : MonoBehaviour
         movementDirectionSpeed = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         movementDirection.Normalize();
 
-        if (Input.GetButton("Fire1")){
-            Shoot();
+        if (Input.GetButtonDown("Fire1")){
+            StartCoroutine("Shoot");
+        }
+        else if (Input.GetButtonUp("Fire1"))
+        {
+            StopCoroutine("Shoot");
+        }
+
+        if (Input.GetButtonDown("Dash"))
+        {
+            Dash();
         }
     }
 
     void Move()
     {
+        transform.rotation = LookatMouse(transform);
         rb.velocity = movementDirection * movementDirectionSpeed * movementSpeed; 
     }
 
-    void LookatMouse()
+    Quaternion LookatMouse(Transform transform)
     {
         Vector2 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+        
+        return Quaternion.AngleAxis(angle, Vector3.back);
     }
 
-    void Shoot()
+    IEnumerator Shoot()
     {
-        Debug.Log("Pew Pew");
+        while (true)
+        {
+            // Pojectile instance 
+            // TODO STOP SPAM CLICKING FIRE
+            GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
+
+            Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+            Vector2 projectilePos = new Vector2(projectileInstance.transform.position.x, projectileInstance.transform.position.y);
+            Vector2 direction = target - projectilePos;
+            direction.Normalize();
+
+            projectileInstance.GetComponent<Base_Projectile>().SetFireDirection(direction);          
+            yield return new WaitForSeconds(shootingSpeed);
+        }
+    }
+
+    void Dash()
+    {
+        //Dash functionality here
     }
 }
