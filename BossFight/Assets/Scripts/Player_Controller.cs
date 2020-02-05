@@ -12,7 +12,10 @@ public class Player_Controller : MonoBehaviour
     private GameObject projectile;
 
     [SerializeField]
-    private float shootingSpeed = 1f;
+    private float shootingDelay = 1f;
+
+    [SerializeField]
+    private float dashStrength = 1f;
 
     [Space]
     [Header("Movement Attributes")]
@@ -23,7 +26,7 @@ public class Player_Controller : MonoBehaviour
 
     private Vector2 movementDirection;
 
-    
+    private bool canShoot = true;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -35,22 +38,20 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InputHandler();
-        Move();  
+        InputHandler();       
     }
-
+    private void FixedUpdate()
+    {
+        Move();
+    }
     private void InputHandler()
     {
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementDirectionSpeed = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         movementDirection.Normalize();
 
-        if (Input.GetButtonDown("Fire1")){
+        if (Input.GetButton("Fire1") && canShoot){
             StartCoroutine("Shoot");
-        }
-        else if (Input.GetButtonUp("Fire1"))
-        {
-            StopCoroutine("Shoot");
         }
 
         if (Input.GetButtonDown("Dash"))
@@ -75,24 +76,33 @@ public class Player_Controller : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        while (true)
-        {
-            // Pojectile instance 
-            // TODO STOP SPAM CLICKING FIRE
-            GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
 
-            Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-            Vector2 projectilePos = new Vector2(projectileInstance.transform.position.x, projectileInstance.transform.position.y);
-            Vector2 direction = target - projectilePos;
-            direction.Normalize();
+        // create object pool for bullets 
+        GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
 
-            projectileInstance.GetComponent<Base_Projectile>().SetFireDirection(direction);          
-            yield return new WaitForSeconds(shootingSpeed);
-        }
+        Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        Vector2 projectilePos = new Vector2(projectileInstance.transform.position.x, projectileInstance.transform.position.y);
+        Vector2 direction = target - projectilePos;
+        direction.Normalize();
+
+        projectileInstance.GetComponent<Base_Projectile>().SetFireDirection(direction);
+
+        canShoot = false;
+
+        yield return new WaitForSeconds(shootingDelay);
+
+        canShoot = true;
+
     }
 
     void Dash()
     {
-        //Dash functionality here
+        // Use rb.velocity with new vector2 and direction also stop movement
+
+        // Dash should be a fixed distance 
+
+        // Dash needs a cooldown
+        Debug.Log(movementDirection);
+        movementSpeed = dashStrength;
     }
 }
