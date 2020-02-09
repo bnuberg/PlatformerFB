@@ -29,6 +29,8 @@ public class Player_Controller : MonoBehaviour
     private bool canShoot = true;
     private Rigidbody2D rb;
 
+    private bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,14 +58,18 @@ public class Player_Controller : MonoBehaviour
 
         if (Input.GetButtonDown("Dash"))
         {
+            canMove = false;
             Dash();
         }
     }
 
     void Move()
     {
-        transform.rotation = LookatMouse(transform);
-        rb.velocity = movementDirection * movementDirectionSpeed * movementSpeed; 
+        if (canMove)
+        {
+            transform.rotation = LookatMouse(transform);
+            rb.velocity = movementDirection * movementDirectionSpeed * movementSpeed;
+        }
     }
 
     Quaternion LookatMouse(Transform transform)
@@ -97,12 +103,15 @@ public class Player_Controller : MonoBehaviour
 
     void Dash()
     {
+        Vector2 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        direction.Normalize();
+        rb.velocity = new Vector2(direction.x, direction.y) * dashStrength;
+        //canMove = true;
         // Use rb.velocity with new vector2 and direction also stop movement
 
         // Dash should be a fixed distance 
 
         // Dash needs a cooldown
-        Debug.Log(movementDirection);
-        movementSpeed = dashStrength;
+        //movementSpeed = dashStrength;
     }
 }
