@@ -215,27 +215,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2202004428766868881, guid: 589d733b4f3ee7645baf03b1872af59a,
-        type: 3}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: 8579530388176166419, guid: 7c449ee3809b8df429f2bc22b6a41ca1,
-        type: 3}
-    - target: {fileID: 2202004428766868881, guid: 589d733b4f3ee7645baf03b1872af59a,
-        type: 3}
-      propertyPath: shootingSpeed
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2202004428766868881, guid: 589d733b4f3ee7645baf03b1872af59a,
-        type: 3}
-      propertyPath: shootingDelay
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2202004428766868881, guid: 589d733b4f3ee7645baf03b1872af59a,
-        type: 3}
-      propertyPath: dashStrength
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2202004428766868885, guid: 589d733b4f3ee7645baf03b1872af59a,
         type: 3}
       propertyPath: m_LocalPosition.x

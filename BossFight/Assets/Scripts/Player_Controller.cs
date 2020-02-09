@@ -4,18 +4,40 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
+    [Header("Player Attributes")]
+    [SerializeField]
+    private int playerMaxHealth = 100;
+
+    private int playerCurrentHealth;
+
+    public int getCurrentHealth { get { return playerCurrentHealth; } }
+
+    [Space]
     [Header("Rotation Attributes")]
     [SerializeField]
     private float rotationSpeed = 2;
 
+    [Space]
+    [Header("Shooting attributes")]
     [SerializeField]
     private GameObject projectile;
 
     [SerializeField]
     private float shootingDelay = 1f;
 
+    private bool canShoot = true;
+
+    [Space]
+    [Header("Dash Attributes")]
+
     [SerializeField]
     private float dashStrength = 1f;
+    [SerializeField]
+    private float dashDuration = 0.2f;
+    [SerializeField]
+    private float dashCooldown = 1;
+
+    private bool canDash = true;
 
     [Space]
     [Header("Movement Attributes")]
@@ -26,15 +48,15 @@ public class Player_Controller : MonoBehaviour
 
     private Vector2 movementDirection;
 
-    private bool canShoot = true;
-    private Rigidbody2D rb;
-
     private bool canMove = true;
+
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerCurrentHealth = playerMaxHealth;
     }
 
     // Update is called once per frame
@@ -56,10 +78,9 @@ public class Player_Controller : MonoBehaviour
             StartCoroutine("Shoot");
         }
 
-        if (Input.GetButtonDown("Dash"))
+        if (Input.GetButtonDown("Dash") && canDash)
         {
-            canMove = false;
-            Dash();
+            StartCoroutine("Dash");
         }
     }
 
@@ -101,11 +122,25 @@ public class Player_Controller : MonoBehaviour
 
     }
 
-    void Dash()
+    IEnumerator Dash()
     {
-        Vector2 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        direction.Normalize();
-        rb.velocity = new Vector2(direction.x, direction.y) * dashStrength;
+        canMove = false;
+        canDash = false;
+
+        if(movementDirection == Vector2.zero)
+        {
+
+        }
+        rb.velocity = new Vector2(movementDirection.x, movementDirection.y) * dashStrength;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        canMove = true;
+
+        yield return new WaitForSeconds(dashCooldown);
+
+        canDash = true;
+        //transform.position += new Vector3(movementDirection.x, movementDirection.y, 0);
         //canMove = true;
         // Use rb.velocity with new vector2 and direction also stop movement
 

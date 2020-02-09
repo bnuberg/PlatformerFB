@@ -143,5 +143,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  projectile: {fileID: 0}
+  projectile: {fileID: 8579530388176166419, guid: 7c449ee3809b8df429f2bc22b6a41ca1,
+    type: 3}
+  shootingDelay: 0.2
+  dashStrength: 9
+  dashDuration: 0.2
+  dashCooldown: 0.6
   movementSpeed: 3
