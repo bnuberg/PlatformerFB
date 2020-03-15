@@ -7,10 +7,10 @@ public class Generic_Boss : MonoBehaviour
 {
     // Health
     [SerializeField]
-    protected Image hpBar;
     protected int maxHealth;
     protected int currentHealth;
 
+    //Attack
     protected int attackDamage;
 
     protected float movementSpeed;
@@ -18,15 +18,21 @@ public class Generic_Boss : MonoBehaviour
     public int getCurrentHealth { get { return currentHealth; } }
     public int getDamage { get { return attackDamage; } }
 
-    public Generic_Boss(int _maxHealth, int _attackDamage, float _movementSpeed)
-    {
-        maxHealth = _maxHealth;
-        currentHealth = _maxHealth;
-        attackDamage = _attackDamage;
-        movementSpeed = _movementSpeed;
-    }
+    public HealthBar healthbar;
 
-    protected virtual void Attack()
+    //public Generic_Boss(int _maxHealth, int _attackDamage, float _movementSpeed)
+    //{
+    //    maxHealth = _maxHealth;
+    //    currentHealth = _maxHealth;
+    //    attackDamage = _attackDamage;
+    //    movementSpeed = _movementSpeed;
+    //}
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthbar.setMaxHealth(maxHealth);
+    }
+    protected virtual void Attack(int damage)
     {
         // Do standard attacks stuff
     }
@@ -46,4 +52,9 @@ public class Generic_Boss : MonoBehaviour
         // Ability container, get's the right ability for the state of the boss
     }
 
+    protected virtual void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthbar.setHealth(currentHealth);
+    }
 }
