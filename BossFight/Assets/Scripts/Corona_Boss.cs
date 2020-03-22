@@ -24,10 +24,4 @@ public class Corona_Boss : Generic_Boss
     {
         // Ability container, get's the right ability for the state of the boss
     }
-
-    override protected void TakeDamage(int damage)
-    {
-        
-       
-    }
 }
