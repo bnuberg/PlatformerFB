@@ -12,17 +12,15 @@ public class Boss_Grab : MonoBehaviour
 
     private Vector2 bossArmPosition;
     private Quaternion bossRotation;
-    private GameObject player;
     private Rigidbody2D rb;
     private bool abilityActive = false;
     private Vector2 targetPlayerPosition;
     private Vector2 startBossArmPosition;
-
+    private bool retractGrab = false;
     public Vector2 Direction { get; set; }
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -30,16 +28,20 @@ public class Boss_Grab : MonoBehaviour
     {
         if (abilityActive)
         {
-            MoveArm();
+            if (!retractGrab)
+            {
+                MoveArm();
+            }
+            else
+            {
+                ReturnArm();
+            }
         }
     }
 
-    private void RotateGrab()
+    private void RotateGrab(Quaternion bossRotation)
     {
-        Vector2 direction;
-        // Rotate arm to face player
-
-
+        transform.rotation = bossRotation;
     }
 
     private float CalculateDistance(Vector2 startPos, Vector2 targetPos)
@@ -51,10 +53,7 @@ public class Boss_Grab : MonoBehaviour
 
     private void MoveArm()
     {
-        //Vector2 target = TargetPlayer();
-        // Rotates to face player from boss perspective;
-        
-        RotateGrab();
+        // TODO Attach player to arm bu checking trigger overlap, then setting player pos to arm and setting ableToMove on player to false
         Vector2 direction = Direction;
         bossArmPosition = transform.position;
         if (CalculateDistance(bossArmPosition, targetPlayerPosition) > 0.1f)
@@ -65,16 +64,33 @@ public class Boss_Grab : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             transform.position = targetPlayerPosition;
+            retractGrab = true;
             // stop boss from moving 
         }
     }
 
-    private void RevertMoveArm()
+    private void ReturnArm()
     {
+        // TODO player still needs to attach to arm, at the end release player and set ableToMove on player tot true;
         // arm movement in reverse;
+        bossArmPosition = transform.position;
+
+        Vector2 direction = startBossArmPosition - targetPlayerPosition;
+        if (CalculateDistance(bossArmPosition, startBossArmPosition) > 0.1f)
+        {
+            rb.velocity = direction * grabVelocity;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = startBossArmPosition;
+            retractGrab = false;
+            abilityActive = false;
+            // stop boss from moving 
+        }
     }
 
-    public void UseAbility(Vector2 _targetPlayerPosition)
+    public void UseAbility(Vector2 _targetPlayerPosition, Quaternion bossRotation)
     {
         abilityActive = true;
 
@@ -83,5 +99,7 @@ public class Boss_Grab : MonoBehaviour
         startBossArmPosition = transform.position;
 
         Direction = new Vector2(targetPlayerPosition.x - transform.position.x, targetPlayerPosition.y - transform.position.y);
+
+        RotateGrab(bossRotation);
     }
 }

@@ -29,9 +29,9 @@ public class Corona_Boss : Generic_Boss
     {
         // Do standard attacks stuff
         if (grabTest)
-        {
+        {         
             Boss_Grab grab = GetAbility();
-            grab.UseAbility(TargetPlayer(player));
+            grab.UseAbility(TargetPlayer(player), transform.rotation);
             grabTest = false;
             // check if hit apply damage to players
         }

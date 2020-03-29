@@ -3030,7 +3030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de014ef5e570b0e4aa90e6a4e53e555d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabVelocity: 5
+  grabVelocity: 1
 --- !u!212 &656801833
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3068,7 +3068,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1808694264286335952, guid: 080bead06b6b73843bcb401aec48c6e4,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
