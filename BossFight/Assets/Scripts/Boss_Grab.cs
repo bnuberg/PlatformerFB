@@ -17,6 +17,8 @@ public class Boss_Grab : MonoBehaviour
     private Vector2 targetPlayerPosition;
     private Vector2 startBossArmPosition;
     private bool retractGrab = false;
+    private bool isPlayerAttached = false;
+    private GameObject playerObject;
     public Vector2 Direction { get; set; }
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,10 @@ public class Boss_Grab : MonoBehaviour
             else
             {
                 ReturnArm();
+            }
+            if (playerObject != null && isPlayerAttached)
+            {
+                playerObject.transform.position = transform.position;
             }
         }
     }
@@ -65,14 +71,33 @@ public class Boss_Grab : MonoBehaviour
             rb.velocity = Vector3.zero;
             transform.position = targetPlayerPosition;
             retractGrab = true;
-            // stop boss from moving 
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player" || collision.gameObject.name == "Player")
+        {
+            AttachPlayerToArm(collision.gameObject);
+        }
+    }
+
+    void AttachPlayerToArm(GameObject player)
+    {
+        playerObject = player;
+        player.GetComponent<Player_Controller>().setCanMove = false;
+        player.GetComponent<Player_Controller>().setCanShoot = false;
+        isPlayerAttached = true;
+    }
+    void DetachPlayerFromArm(GameObject player)
+    {
+        player.GetComponent<Player_Controller>().setCanMove = true;
+        player.GetComponent<Player_Controller>().setCanShoot = true;
+        isPlayerAttached = false;
+        playerObject = null;
+    }
     private void ReturnArm()
     {
-        // TODO player still needs to attach to arm, at the end release player and set ableToMove on player tot true;
-        // arm movement in reverse;
         bossArmPosition = transform.position;
 
         Vector2 direction = startBossArmPosition - targetPlayerPosition;
@@ -86,7 +111,10 @@ public class Boss_Grab : MonoBehaviour
             transform.position = startBossArmPosition;
             retractGrab = false;
             abilityActive = false;
-            // stop boss from moving 
+            if(playerObject != null)
+            {
+                DetachPlayerFromArm(playerObject);
+            }
         }
     }
 

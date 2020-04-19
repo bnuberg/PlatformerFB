@@ -52,6 +52,9 @@ public class Player_Controller : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public bool setCanMove { set { canMove = value; } }
+    public bool setCanShoot { set { canShoot = value; } }
+
     // Start is called before the first frame update
     void Start()
     {

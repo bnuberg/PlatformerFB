@@ -2990,6 +2990,7 @@ GameObject:
   - component: {fileID: 656801833}
   - component: {fileID: 656801832}
   - component: {fileID: 656801831}
+  - component: {fileID: 656801835}
   m_Layer: 0
   m_Name: Fist
   m_TagString: Untagged
@@ -3095,6 +3096,32 @@ Transform:
   m_Father: {fileID: 1090983084}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &656801835
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656801830}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.95}
+    newSize: {x: 0.52, y: 0.09}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.64, y: 0.95}
+  m_EdgeRadius: 0
 --- !u!1 &660775133
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,6 +3384,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040038686951013446, guid: 1ec121aa67ccb764fbcb786602af6b5c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9110013515434715476, guid: 1ec121aa67ccb764fbcb786602af6b5c,
         type: 3}
@@ -11473,6 +11505,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202004428766868880, guid: 589d733b4f3ee7645baf03b1872af59a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202004428766868884, guid: 589d733b4f3ee7645baf03b1872af59a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2202004428766868885, guid: 589d733b4f3ee7645baf03b1872af59a,
         type: 3}
