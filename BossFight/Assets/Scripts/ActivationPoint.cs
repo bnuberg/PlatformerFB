@@ -6,6 +6,7 @@ public class ActivationPoint : MonoBehaviour
 {
     private bool isActive = false;
     public bool getIsActive { get { return isActive; } }
+    public Sprite activatedSprites;// all'attivazione cambia sprite
 
 
     private ActivationPointController activationPointControllers;
