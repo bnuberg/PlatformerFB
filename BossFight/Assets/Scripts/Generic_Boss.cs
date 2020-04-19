@@ -13,11 +13,13 @@ public class Generic_Boss : MonoBehaviour
     //Attack
     protected int attackDamage;
     protected float movementSpeed;
-
+    protected bool canMove;
     protected GameObject player;
     protected Player_Controller playerController;
     public int getCurrentHealth { get { return currentHealth; } }
     public int getDamage { get { return attackDamage; } }
+
+    public bool setCanMove { set { canMove = value; } }
 
     public HealthBar healthbar;
 

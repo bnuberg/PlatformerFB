@@ -8,7 +8,9 @@ public class Corona_Boss : Generic_Boss
     private bool grabTest = false;
     private Movement_Boss movement;
     private GameObject player;
-    private bool canMove= false;
+    [SerializeField]
+    private float rotationSpeed = 2f;
+
     private void Awake()
     {
         movement = gameObject.AddComponent<Movement_Boss>();
@@ -23,6 +25,7 @@ public class Corona_Boss : Generic_Boss
         player = GameObject.Find("Player");
         //grabAbility = new Boss_Grab();
         playerController = player.GetComponent<Player_Controller>();
+        canMove = true;
     }
     void Update()
     {
@@ -36,9 +39,9 @@ public class Corona_Boss : Generic_Boss
     {
         // Do standard attacks stuff
         if (grabTest)
-        {         
+        {
             Boss_Grab grab = GetAbility();
-            grab.UseAbility(TargetPlayer(player), transform.rotation);
+            grab.UseAbility(TargetPlayer(player), transform.rotation, this);
             grabTest = false;
             // check if hit apply damage to players
         }
@@ -57,7 +60,8 @@ public class Corona_Boss : Generic_Boss
     override protected void Move()
     {
         movement.DoMovement();
-        transform.rotation = movement.LookatPlayer(transform.position, player.transform.position);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, movement.LookatPlayer(transform.position, player.transform.position), rotationSpeed * Time.deltaTime);
+            
         // Handles movement of the boss
     }
 

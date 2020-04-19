@@ -19,6 +19,7 @@ public class Boss_Grab : MonoBehaviour
     private bool retractGrab = false;
     private bool isPlayerAttached = false;
     private GameObject playerObject;
+    private Generic_Boss bossInstance;
     public Vector2 Direction { get; set; }
     // Start is called before the first frame update
     void Start()
@@ -59,7 +60,7 @@ public class Boss_Grab : MonoBehaviour
 
     private void MoveArm()
     {
-        // TODO Attach player to arm bu checking trigger overlap, then setting player pos to arm and setting ableToMove on player to false
+        bossInstance.setCanMove = false;
         Vector2 direction = Direction;
         bossArmPosition = transform.position;
         if (CalculateDistance(bossArmPosition, targetPlayerPosition) > 0.1f)
@@ -114,13 +115,16 @@ public class Boss_Grab : MonoBehaviour
             if(playerObject != null)
             {
                 DetachPlayerFromArm(playerObject);
+                bossInstance.setCanMove = true;
             }
         }
     }
 
-    public void UseAbility(Vector2 _targetPlayerPosition, Quaternion bossRotation)
+    public void UseAbility(Vector2 _targetPlayerPosition, Quaternion bossRotation, Generic_Boss boss)
     {
         abilityActive = true;
+
+        bossInstance = boss;
 
         targetPlayerPosition = _targetPlayerPosition;
 
