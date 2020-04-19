@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Controller : MonoBehaviour
 {
     [Header("Player Attributes")]
     [SerializeField]
-    private int playerMaxHealth = 100;
-
+    private int playerMaxHealth;
     private int playerCurrentHealth;
+
+    public HealthBar healthbar;
+
 
     public int getCurrentHealth { get { return playerCurrentHealth; } }
 
@@ -60,6 +63,8 @@ public class Player_Controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerCurrentHealth = playerMaxHealth;
+        healthbar.setMaxHealth(playerMaxHealth);
+
     }
 
     // Update is called once per frame
@@ -151,5 +156,12 @@ public class Player_Controller : MonoBehaviour
 
         // Dash needs a cooldown
         //movementSpeed = dashStrength;
+    }
+
+
+    protected virtual void TakeDamage( int damage)
+    {
+        playerCurrentHealth -= damage;
+        healthbar.setHealth(playerCurrentHealth);
     }
 }

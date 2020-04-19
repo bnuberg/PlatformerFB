@@ -6,25 +6,32 @@ public class Corona_Boss : Generic_Boss
 {
     [SerializeField]
     private bool grabTest = false;
+    private Movement_Boss movement;
+    private GameObject player;
+    private bool canMove= false;
+    private void Awake()
+    {
+        movement = gameObject.AddComponent<Movement_Boss>();
+        player = GameObject.Find("Player");
+    }
 
     [SerializeField]
     private GameObject arm;
-    //private Boss_Grab grabAbility;
-    // Update is called once per frame
-
     // Start is called before the first frame update
     void Start()
     {
-        //grabAbility = new Boss_Grab();
         player = GameObject.Find("Player");
+        //grabAbility = new Boss_Grab();
         playerController = player.GetComponent<Player_Controller>();
     }
-
     void Update()
     {
+        if (canMove)
+        {
+            Move();
+        }
         Attack(10);
     }
-
     override protected void Attack(int damage)
     {
         // Do standard attacks stuff
@@ -49,6 +56,8 @@ public class Corona_Boss : Generic_Boss
 
     override protected void Move()
     {
+        movement.DoMovement();
+        transform.rotation = movement.LookatPlayer(transform.position, player.transform.position);
         // Handles movement of the boss
     }
 
