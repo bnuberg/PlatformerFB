@@ -6,7 +6,7 @@ public class Corona_Boss : Generic_Boss
 {
     private Movement_Boss movement;
     private GameObject player;
-    private bool canMove= false;
+    private bool canMove= true;
     private void Awake()
     {
         movement = gameObject.AddComponent<Movement_Boss>();
