@@ -142,6 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9330a1ce0c21c4e479cd9fc1b8247e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMaxHealth: 100
+  healthbar: {fileID: 0}
   rotationSpeed: 2
   projectile: {fileID: 8579530388176166419, guid: 7c449ee3809b8df429f2bc22b6a41ca1,
     type: 3}

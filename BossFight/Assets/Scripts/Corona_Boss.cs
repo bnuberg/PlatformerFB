@@ -7,26 +7,17 @@ public class Corona_Boss : Generic_Boss
     [SerializeField]
     private bool grabTest = false;
     private Movement_Boss movement;
-    private GameObject player;
     [SerializeField]
     private float rotationSpeed = 2f;
 
     private void Awake()
     {
         movement = gameObject.AddComponent<Movement_Boss>();
-        player = GameObject.Find("Player");
     }
 
     [SerializeField]
     private GameObject arm;
     // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.Find("Player");
-        //grabAbility = new Boss_Grab();
-        playerController = player.GetComponent<Player_Controller>();
-        canMove = true;
-    }
     void Update()
     {
         if (canMove)
@@ -73,4 +64,5 @@ public class Corona_Boss : Generic_Boss
         // Ability container, get's the right ability for the state of the boss
         return grabAbility;
     }
+
 }

@@ -15,6 +15,7 @@ public class Generic_Boss : MonoBehaviour
     protected float movementSpeed;
     protected bool canMove;
     protected GameObject player;
+    protected GameObject shield;
     protected Player_Controller playerController;
     public int getCurrentHealth { get { return currentHealth; } }
     public int getDamage { get { return attackDamage; } }
@@ -36,7 +37,10 @@ public class Generic_Boss : MonoBehaviour
         healthbar.setMaxHealth(maxHealth);
 
         player = GameObject.Find("Player");
+        shield = GameObject.Find("Shield");
         playerController = player.GetComponent<Player_Controller>();
+        canMove = true;
+
     }
     protected virtual void Attack(int damage)
     {
@@ -62,5 +66,20 @@ public class Generic_Boss : MonoBehaviour
     {
         currentHealth -= damage;
         healthbar.setHealth(currentHealth);
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Projectile")
+        {
+
+            if (!shield.activeInHierarchy)
+            {
+                TakeDamage(playerController.getDamageProjectile);
+            }
+
+
+
+        }
+
     }
 }
