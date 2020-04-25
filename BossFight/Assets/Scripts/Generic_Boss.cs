@@ -12,11 +12,14 @@ public class Generic_Boss : MonoBehaviour
 
     //Attack
     protected int attackDamage;
-
     protected float movementSpeed;
-
+    protected bool canMove;
+    protected GameObject player;
+    protected Player_Controller playerController;
     public int getCurrentHealth { get { return currentHealth; } }
     public int getDamage { get { return attackDamage; } }
+
+    public bool setCanMove { set { canMove = value; } }
 
     public HealthBar healthbar;
 
@@ -31,6 +34,9 @@ public class Generic_Boss : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthbar.setMaxHealth(maxHealth);
+
+        player = GameObject.Find("Player");
+        playerController = player.GetComponent<Player_Controller>();
     }
     protected virtual void Attack(int damage)
     {
@@ -47,9 +53,9 @@ public class Generic_Boss : MonoBehaviour
         // Handles movement of the boss
     }
 
-    protected virtual void GetAbility()
+    protected virtual Boss_Grab GetAbility()
     {
-        // Ability container, get's the right ability for the state of the boss
+        return null;
     }
 
     protected virtual void TakeDamage(int damage)
