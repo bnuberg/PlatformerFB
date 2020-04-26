@@ -29,7 +29,7 @@ public class Player_Controller : MonoBehaviour
     private float shootingDelay = 1f;
 
     [SerializeField]
-    private int damageProjectile = 5;
+    private int projectileDamage = 5;
 
     private bool canShoot = true;
 
@@ -61,7 +61,7 @@ public class Player_Controller : MonoBehaviour
     public bool setCanMove { set { canMove = value; } }
     public bool setCanShoot { set { canShoot = value; } }
 
-    public int getDamageProjectile { get { return damageProjectile; } }
+    public int getProjectileDamage { get { return projectileDamage; } }
 
     // Start is called before the first frame update
     void Start()
@@ -116,23 +116,27 @@ public class Player_Controller : MonoBehaviour
 
     IEnumerator Shoot()
     {
-
         // create object pool for bullets 
-        GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
+        GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject("Projectile");
+        if(bullet != null)
+        {
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = transform.rotation;
+            bullet.SetActive(true);
+        }
 
         Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-        Vector2 projectilePos = new Vector2(projectileInstance.transform.position.x, projectileInstance.transform.position.y);
+        Vector2 projectilePos = new Vector2(bullet.transform.position.x, bullet.transform.position.y);
         Vector2 direction = target - projectilePos;
         direction.Normalize();
 
-        projectileInstance.GetComponent<Base_Projectile>().SetFireDirection(direction);
+        bullet.GetComponent<Base_Projectile>().SetFireDirection(direction);
 
         canShoot = false;
 
         yield return new WaitForSeconds(shootingDelay);
 
         canShoot = true;
-
     }
 
     IEnumerator Dash()
