@@ -70,7 +70,6 @@ public class ActivationPointController : MonoBehaviour
                 if (activationPoint.getIsActive)
                 {
                     bossShield.SetActive(false);
-                    Debug.Log("Rimozone active point");
                     spawnDummy.SetActive(false);
                     count = 0;
                     activationPoint.ResetActivationPoint();
@@ -103,6 +102,7 @@ public class ActivationPointController : MonoBehaviour
         dummyDamage = true;
         yield return new WaitForSeconds(timeToSpawnShield);
         bossShield.SetActive(true);
+        dummyDamage = false;
 
 
     }
