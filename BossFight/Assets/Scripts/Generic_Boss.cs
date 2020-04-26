@@ -71,15 +71,10 @@ public class Generic_Boss : MonoBehaviour
     {
         if (collision.gameObject.tag == "Projectile")
         {
-
             if (!shield.activeInHierarchy)
             {
-                TakeDamage(playerController.getDamageProjectile);
+                TakeDamage(playerController.getProjectileDamage);
             }
-
-
-
         }
-
     }
 }

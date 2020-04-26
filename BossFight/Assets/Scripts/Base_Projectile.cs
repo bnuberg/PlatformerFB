@@ -10,11 +10,10 @@ public class Base_Projectile : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 fireDirection;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         ApplyForce(fireDirection);
-        Destroy(gameObject, 2f);
     }
 
     // Update is called once per frame
@@ -31,5 +30,13 @@ public class Base_Projectile : MonoBehaviour
     public void SetFireDirection(Vector2 direction)
     {
         fireDirection = direction;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Active")
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
