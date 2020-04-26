@@ -86,7 +86,6 @@ public class ActivationPointController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
         if (collision.gameObject.tag == "Projectile")
         {
             if (!dummyDamage)

@@ -28,6 +28,9 @@ public class Player_Controller : MonoBehaviour
     [SerializeField]
     private float shootingDelay = 1f;
 
+    [SerializeField]
+    private int damageProjectile = 5;
+
     private bool canShoot = true;
 
     [Space]
@@ -57,6 +60,8 @@ public class Player_Controller : MonoBehaviour
 
     public bool setCanMove { set { canMove = value; } }
     public bool setCanShoot { set { canShoot = value; } }
+
+    public int getDamageProjectile { get { return damageProjectile; } }
 
     // Start is called before the first frame update
     void Start()
