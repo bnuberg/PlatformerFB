@@ -12,7 +12,6 @@ public class Player_Controller : MonoBehaviour
 
     public HealthBar healthbar;
 
-
     public int getCurrentHealth { get { return playerCurrentHealth; } }
 
     [Space]
@@ -22,9 +21,6 @@ public class Player_Controller : MonoBehaviour
 
     [Space]
     [Header("Shooting attributes")]
-    [SerializeField]
-    private GameObject projectile;
-
     [SerializeField]
     private float shootingDelay = 1f;
 
