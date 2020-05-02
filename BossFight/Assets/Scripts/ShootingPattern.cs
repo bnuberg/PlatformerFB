@@ -2,51 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingPattern : MonoBehaviour
+[System.Serializable]
+public class ShootingPattern
 {
-    public class Pattern
-    {
-        public int bulletAmount;
-        public float spreadAmount;
-    }
     [Header("Shooting Attributes")]
     [Range(0.0f, 10.0f)]
     private float shootingDelay = 1.0f;
 
+    [Range(0, 100)]
+    public int bulletAmount;
+    [Range(0.0f, 100.0f)]
+    public float spreadAmount;
+
+    private List<GameObject> bullets;
     private bool canShoot;
 
-    [SerializeField]
-    private List<Pattern> patterns;
-
+    private Vector2 bulletDirection;
 
     private void GenerateShootingPattern()
     {
+        for(int i = 0; i < bulletAmount; i++)
+        {
+            bullets[i] = ObjectPooler.SharedInstance.GetPooledObject("Projectile");
+        }
 
     }
-
+    // TODO Math function for bullet patterns 
     IEnumerator Shoot()
     {
         // TODO Get Pattern and use it to generate bullet position
-        // create object pool for bullets 
-        GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject("Projectile");
-        if (bullet != null)
-        {
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation;
-            bullet.SetActive(true);
-        }
-
-        Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-        Vector2 projectilePos = new Vector2(bullet.transform.position.x, bullet.transform.position.y);
-        Vector2 direction = target - projectilePos;
-        direction.Normalize();
-
-        bullet.GetComponent<Base_Projectile>().SetFireDirection(direction);
-
-        canShoot = false;
 
         yield return new WaitForSeconds(shootingDelay);
-
-        canShoot = true;
     }
 }
