@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1864687678621229984}
   - component: {fileID: 1608957162329441367}
   - component: {fileID: 9133955516856828062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: ae1b9f9d30cb70c46847486443ca886d, type: 3}
   m_Color: {r: 1, g: 0.9561808, b: 0, a: 1}
   m_FlipX: 0
@@ -132,4 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b84a14474720b4396af3cccfe20177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 400
+  projectileSpeed: 3

@@ -65,7 +65,6 @@ public class Player_Controller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerCurrentHealth = playerMaxHealth;
         healthbar.setMaxHealth(playerMaxHealth);
-
     }
 
     // Update is called once per frame
@@ -117,6 +116,7 @@ public class Player_Controller : MonoBehaviour
         if(bullet != null)
         {
             bullet.transform.position = transform.position;
+            Debug.Log("POS:" + bullet.transform.position);
             bullet.transform.rotation = transform.rotation;
             bullet.SetActive(true);
         }

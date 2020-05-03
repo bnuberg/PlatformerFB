@@ -13,7 +13,6 @@ public class Base_Projectile : MonoBehaviour
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
-        ApplyForce(fireDirection);
     }
 
     // Update is called once per frame
@@ -24,12 +23,13 @@ public class Base_Projectile : MonoBehaviour
 
     void ApplyForce(Vector2 target)
     {
-        rb.velocity= target * projectileSpeed * Time.deltaTime;
+        rb.velocity= target * projectileSpeed;
     }
 
     public void SetFireDirection(Vector2 direction)
     {
         fireDirection = direction;
+        Debug.Log(direction);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

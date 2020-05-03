@@ -50,7 +50,7 @@ public class ObjectPooler : MonoBehaviour
             {
                 if (item.shouldExpand)
                 {
-                    GameObject obj = (GameObject)Instantiate(item.objectToPool);
+                    GameObject obj = (GameObject)Instantiate(item.objectToPool, item.parent);
                     obj.SetActive(false);
                     pooledObjects.Add(obj);
                     return obj;
